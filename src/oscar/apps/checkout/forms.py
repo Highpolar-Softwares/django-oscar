@@ -15,7 +15,7 @@ Country = get_model('address', 'Country')
 class ShippingAddressForm(PhoneNumberMixin, AbstractAddressForm):
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)        
         self.adjust_country_field()
 
     def adjust_country_field(self):

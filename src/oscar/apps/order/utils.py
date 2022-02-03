@@ -47,6 +47,7 @@ class OrderCreator(object):
         Placing an order involves creating all the relevant models based on the
         basket and session data.
         """
+        
         if basket.is_empty:
             raise ValueError(_("Empty baskets cannot be submitted"))
         if not order_number:
@@ -54,8 +55,9 @@ class OrderCreator(object):
             order_number = generator.order_number(basket)
         if not status and hasattr(settings, 'OSCAR_INITIAL_ORDER_STATUS'):
             status = getattr(settings, 'OSCAR_INITIAL_ORDER_STATUS')
-
+        
         if Order._default_manager.filter(number=order_number).exists():
+            print("order exists here",order_number)
             raise ValueError(_("There is already an order with number %s")
                              % order_number)
 
