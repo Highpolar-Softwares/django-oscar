@@ -381,7 +381,7 @@ class OrderListView(EventHandlerMixin, BulkEditMixin, ListView):
             % self.get_download_filename(request)
         writer = UnicodeCSVWriter(open_file=response)
 
-        writer.writerow(self.CSV_COLUMNS.values())
+        writer.writerow(self.CSV_COLUMNS if isinstance(self.CSV_COLUMNS, set) else self.CSV_COLUMNS.values())
         for order in orders:
             row_values = self.get_row_values(order)
             writer.writerow([row_values.get(column, "") for column in self.CSV_COLUMNS])
